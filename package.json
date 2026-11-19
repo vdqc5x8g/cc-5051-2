@@ -1,0 +1,36 @@
+{
+  "name": "lift-shaft-nav",
+  "version": "1.0.0",
+  "description": "Time-dependent navigation through periodic lift platforms and timed gates",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "vitest run",
+    "test:ui": "node test/ui.smoke.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdqc5x8g/cc-5051-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vdqc5x8g/cc-5051-2/issues"
+  },
+  "homepage": "https://github.com/vdqc5x8g/cc-5051-2#readme",
+  "dependencies": {
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1",
+    "vite": "^7.3.8",
+    "vitest": "^3.2.7"
+  },
+  "type": "module"
+}
