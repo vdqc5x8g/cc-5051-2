@@ -1,0 +1,20 @@
+{
+  "updatedBy": "maintenance-cli",
+  "services": {
+    "LG-S2": {
+      "endRule": "inclusive",
+      "note": "与 LG-S1 同平台同型，沿用轨迹还原约定",
+      "at": "2026-11-20"
+    },
+    "LG-B1": {
+      "endRule": "exclusive",
+      "note": "调度员确认 B 平台按关门 − 缓冲执行",
+      "at": "2026-11-20"
+    },
+    "LG-S3": {
+      "endRule": "inclusive",
+      "note": "无轨迹证据，按线网默认约定",
+      "at": "2026-11-20"
+    }
+  }
+}

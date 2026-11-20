@@ -87,6 +87,25 @@ node test/ui.verify.mjs    # 等待原因、搭乘位姿一致、到达偏差、
 
 `ui.verify.mjs` 会输出 JSON 断言数据，并截图到 `/tmp`。
 
+## 班次样例重建与维护检查器
+
+旧版时刻表缺少「结束时刻是否仍可登车」的显式约定。维护工具从真实调度数据
+（传感器观测 + 角色轨迹 + 预订/通知）重建班次样例，并核对两种实测走法：
+
+```bash
+npm run maintenance                              # 重建 + 检查器 + 生成 docs/maintenance.md
+node src/maintenance/cli.js view LG-S1           # 站台视图：逐拍看预约/开门/真正登乘
+node src/maintenance/cli.js resolve LG-S2 inclusive --note "…"   # 保存歧义班次的人工选择
+```
+
+- `src/maintenance/samples.js`：旧版时刻表与真实调度数据；样例 S-EDGE-01（闸门正好关上时登乘）、
+  S-DELAY-02（下一班同名平台临时晚点，只调整第二班后复验原班乘客）、S-MISS-03（漏乘续订）、
+  S-WRONG-04（误乘）、S-XFER-05（正确换乘）、S-STALE-06（已站在新平台上仍收到旧站台通知）。
+- 重建器用已有轨迹判定哪些旧班次可以确定还原；歧义班次的人工选择保存在
+  `maintenance/resolutions.json`，与轨迹证据矛盾的选择会被拒绝。
+- 检查器核对「窗口关闭前是否真正到达」与「错过本班后续订哪一班」；
+  维护说明引用这些实测走法及样例编号。
+
 ## 目录
 
 ```
@@ -95,6 +114,7 @@ src/core/timetable.js    升降通路内核（唯一状态源）
 src/core/planner.js      时间相关最早到达搜索 + 固定距离基线 + 穷举参考
 src/core/follower.js     执行跟随器（逐边界条件确认、重算、实际偏差）
 src/scene/StationScene.js 三维场景（只消费内核帧）
+src/maintenance/         班次样例重建 + 维护检查器（CLI）
 src/ui/                  界面与控件
 test/                    vitest + Playwright 验收
 ```
